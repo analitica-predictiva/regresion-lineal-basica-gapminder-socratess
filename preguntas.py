@@ -79,31 +79,31 @@ def pregunta_03():
 
     # Asigne a la variable los valores de la columna `life`
     y_life = df["life"].values
+    
+    X_fertility_reshape = X_fertility.reshape(-1, 1)
+    y_life_reshape = y_life.reshape(-1, 1)
 
     # Importe LinearRegression
-    from sklearn import linear_model
+    from sklearn.linear_model import LinearRegression
 
     # Cree una instancia del modelo de regresión lineal
-    reg = linear_model.LinearRegression()
+    reg = LinearRegression()
 
     # Cree El espacio de predicción. Esto es, use linspace para crear
     # un vector con valores entre el máximo y el mínimo de X_fertility
     prediction_space = np.linspace(
-        X_fertility.min(),
-        X_fertility.max(),
-    ).reshape(1, -1)[:, np.newaxis]
+        X_fertility_reshape.min(),
+        X_fertility_reshape.max(),
+    ).reshape(-1, 1)
 
     # Entrene el modelo usando X_fertility y y_life
-    reg.fit(X_fertility, y_life)[:, np.newaxis]
+    reg.fit(X_fertility_reshape, y_life_reshape)
 
     # Compute las predicciones para el espacio de predicción
     y_pred = reg.predict(prediction_space)
 
     # Imprima el R^2 del modelo con 4 decimales
-    print(X_fertility.shape)
-    print(X_fertility.min())
-    print(X_fertility.max())
-    print(reg.score(X_fertility.reshape(-1, 1), y_pred).round(4))
+    print(reg.score(X_fertility_reshape, y_life_reshape).round(4))
 
 
 def pregunta_04():
