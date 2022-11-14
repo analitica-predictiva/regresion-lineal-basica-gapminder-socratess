@@ -129,12 +129,15 @@ def pregunta_04():
     # Asigne a la variable los valores de la columna `life`
     y_life = df['life'].values
 
+    X_fertility_reshape = X_fertility.reshape(-1, 1)
+    y_life_reshape = y_life.reshape(-1, 1)
+
     # Divida los datos de entrenamiento y prueba. La semilla del generador de números
     # aleatorios es 53. El tamaño de la muestra de entrenamiento es del 80%
     (X_train, X_test, y_train, y_test,) = train_test_split(
-        X_fertility.reshape(-1, 1),
-        y_life.reshape(-1, 1),
-        test_size=0.80,
+        X_fertility_reshape,
+        y_life_reshape,
+        test_size=0.20,
         random_state=53,
     )
 
