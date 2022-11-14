@@ -91,16 +91,19 @@ def pregunta_03():
     prediction_space = np.linspace(
         X_fertility.min(),
         X_fertility.max(),
-    ).reshape(1, -1)
+    ).reshape(1, -1)[:, np.newaxis]
 
     # Entrene el modelo usando X_fertility y y_life
-    reg.fit(X_fertility, y_life)
+    reg.fit(X_fertility, y_life)[:, np.newaxis]
 
     # Compute las predicciones para el espacio de predicción
     y_pred = reg.predict(prediction_space)
 
     # Imprima el R^2 del modelo con 4 decimales
-    print(reg.score(X_fertility, y_pred).round(4))
+    print(X_fertility.shape)
+    print(X_fertility.min())
+    print(X_fertility.max())
+    print(reg.score(X_fertility.reshape(-1, 1), y_pred).round(4))
 
 
 def pregunta_04():
@@ -128,23 +131,23 @@ def pregunta_04():
 
     # Divida los datos de entrenamiento y prueba. La semilla del generador de números
     # aleatorios es 53. El tamaño de la muestra de entrenamiento es del 80%
-    (X_train, X_test, y_train, y_test,) = ____(
-        ____,
-        ____,
-        test_size=____,
-        random_state=____,
+    (X_train, X_test, y_train, y_test,) = train_test_split(
+        X_fertility.reshape(-1, 1),
+        y_life.reshape(-1, 1),
+        test_size=0.80,
+        random_state=53,
     )
 
     # Cree una instancia del modelo de regresión lineal
-    linearRegression = linear_model.LinearRegression()
+    linearRegression = LinearRegression()
 
     # Entrene el clasificador usando X_train y y_train
     linearRegression.fit(X_train, y_train)
 
     # Pronostique y_test usando X_test
-    y_pred = ____
+    y_pred = linearRegression.predict(X_test)
 
     # Compute and print R^2 and RMSE
     print("R^2: {:6.4f}".format(linearRegression.score(X_test, y_test)))
-    rmse = np.sqrt(____(____, ____))
+    rmse = np.sqrt(mean_squared_error(y_test, y_pred))
     print("Root Mean Squared Error: {:6.4f}".format(rmse))
