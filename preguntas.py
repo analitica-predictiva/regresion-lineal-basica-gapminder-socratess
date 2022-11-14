@@ -80,7 +80,10 @@ def pregunta_03():
     # Asigne a la variable los valores de la columna `life`
     y_life = df["life"].values
     
+    # Se transforma X_fertility a un array de numpy usando reshape
     X_fertility_reshape = X_fertility.reshape(-1, 1)
+    
+    # Se transforma y_life a un array de numpy usando reshape
     y_life_reshape = y_life.reshape(-1, 1)
 
     # Importe LinearRegression
@@ -129,7 +132,10 @@ def pregunta_04():
     # Asigne a la variable los valores de la columna `life`
     y_life = df['life'].values
 
+    # Se transforma X_fertility a un array de numpy usando reshape
     X_fertility_reshape = X_fertility.reshape(-1, 1)
+    
+    # Se transforma y_life a un array de numpy usando reshape
     y_life_reshape = y_life.reshape(-1, 1)
 
     # Divida los datos de entrenamiento y prueba. La semilla del generador de números
